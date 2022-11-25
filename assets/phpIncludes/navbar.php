@@ -1,7 +1,7 @@
 <div class="navbar">
     <a href="index.php" id="navbarBrand">BTS SIO 1</a>
     <div class="categorie">
-        <a href="">Développement</a>
+        <a href="">Développement</a> 
         <a href="">Cyber-Sécurité</a>
         <a href="">Jeux-Vidéos</a>
         <a href="">Réseau</a>
@@ -11,3 +11,5 @@
         <a href="">Contributeur</a>
     </div>
 </div>
+
+<!-- aller chercher les noms des catégories dans la bdd -->
