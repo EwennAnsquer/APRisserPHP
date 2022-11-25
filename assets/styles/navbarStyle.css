@@ -1,5 +1,40 @@
 .navbar{
-    background-color: rgb(49,52,254) !important;
+    background-color: rgb(49,52,254);
     width: 100vw;
     height: 100px;
+    display: flex;
+    justify-content:space-between;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items:center;
+    padding: 0 10%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+
+.navbar #navbarBrand{
+    font-size: 30px;
+}
+
+.navbar a{
+    text-decoration: none;
+    color: white;
+}
+
+.navbar div{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.navbar .categorie{
+    flex-direction: row;
+    gap: 50px;
+}
+
+.navbar .admin{
+    flex-direction: column;
+    gap: 15px;
 }

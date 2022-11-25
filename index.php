@@ -10,5 +10,11 @@
 </head>
 <body>
     <?php include('assets/phpIncludes/navbar.php');?>
+    <div class="heroPage">
+        <h1>TITRE</h1>
+    </div>
+    <div class="categorieDeveloppement">
+
+    </div>
 </body>
 </html>
