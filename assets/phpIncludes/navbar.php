@@ -1,14 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="index.php">BTS SIO 1</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
       <ul class="navbar-nav">
         <?php
-            // $test=$connexion->$prepare("SELECT * from categorie")->execute();
-            // var_dump($test);
             $requete = $connexion->prepare('SELECT LIBELLE_CATEG from categorie');
             $requete->execute();
             $categorie = $requete->fetchAll();
@@ -24,8 +22,8 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                             <?php
-                                foreach($article as $art){?>
-                                  <li><a class="dropdown-item" href="#"><?php echo($art["TITRE_ART"]); ?></a></li><?php
+                                foreach($article as $art){
+                                    echo('<li><a class="dropdown-item" href="metier.php?m='.$art["TITRE_ART"].'">'.$art["TITRE_ART"].'</a></li>');
                                 }
                             ?>
                         </ul>
