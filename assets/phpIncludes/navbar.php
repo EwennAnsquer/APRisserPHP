@@ -14,7 +14,7 @@
             $categorie = $requete->fetchAll();
 
             foreach($categorie as $categ){
-                $requete = $connexion->prepare('SELECT TITRE_ART,categorie.ID_CAT FROM article inner join categorie on article.ID_CAT = categorie.ID_CAT where LIBELLE_CATEG="'.$categ["LIBELLE_CATEG"].'"');
+                $requete = $connexion->prepare('SELECT * FROM article inner join categorie on article.ID_CAT = categorie.ID_CAT where LIBELLE_CATEG="'.$categ["LIBELLE_CATEG"].'"');
                 $requete->execute();
                 $article = $requete->fetchAll();
                 ?>
@@ -24,13 +24,8 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                             <?php
-                                //foreach($article as $art){
-                                    //echo($art);
-                                    //<li><a class="dropdown-item" href="#">TRUC</a></li>
-                                //}
-                                var_dump($article);
-                                foreach($article as $art){
-                                    echo($art);
+                                foreach($article as $art){?>
+                                  <li><a class="dropdown-item" href="#"><?php echo($art["TITRE_ART"]); ?></a></li><?php
                                 }
                             ?>
                         </ul>
