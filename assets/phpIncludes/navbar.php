@@ -7,23 +7,28 @@
     <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
         <ul class="navbar-nav">
             <?php
-                $requete = $connexion->prepare('SELECT LIBELLE_CATEG from categorie');
+                $requete = $connexion->prepare('SELECT ID_CAT from categorie');
                 $requete->execute();
                 $categorie = $requete->fetchAll();
 
                 foreach($categorie as $categ){
-                    $requete = $connexion->prepare('SELECT * FROM article inner join categorie on article.ID_CAT = categorie.ID_CAT where LIBELLE_CATEG=:cat');
-                    $requete->bindValue(':cat', $categ["LIBELLE_CATEG"], PDO::PARAM_INT);
+                    $requete = $connexion->prepare('SELECT * FROM article inner join categorie on article.ID_CAT = categorie.ID_CAT where article.ID_CAT=:categorie');
+                    $requete->bindValue(':categorie', $categ["ID_CAT"], PDO::PARAM_INT);
                     $requete->execute();
-                    $article = $requete->fetchAll();
+                    $articles = $requete->fetchAll();
+
+                    $requete = $connexion->prepare('SELECT distinct LIBELLE_CATEG FROM `categorie` inner join article on article.ID_CAT = categorie.ID_CAT where categorie.ID_CAT=:ID_CAT');
+                    $requete->bindValue(':ID_CAT', $categ["ID_CAT"], PDO::PARAM_INT);
+                    $requete->execute();
+                    $actualCat = $requete->fetchAll();
                     ?>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <?php echo($categ["LIBELLE_CATEG"]); ?>
+                                <?php echo($actualCat[0]["LIBELLE_CATEG"]); ?>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
                                 <?php
-                                    foreach($article as $art){
+                                    foreach($articles as $art){
                                         echo('<li><a class="dropdown-item" href="metier.php?m='.$art["ID_ART"].'">'.$art["TITRE_ART"].'</a></li>');
                                     }
                                 ?>
