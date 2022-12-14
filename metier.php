@@ -1,8 +1,8 @@
 <?php
     if(isset($_GET['m'])){
-        $data=$_GET['m'];
         include_once('assets/phpIncludes/connexion.php');
-        $requete = $connexion->prepare('SELECT * FROM article where TITRE_ART="'.$data.'"');
+        $requete = $connexion->prepare('SELECT * FROM article where ID_ART=:id');
+        $requete->bindValue(':id', $_GET['m'], PDO::PARAM_INT);
         $requete->execute();
         $metier = $requete->fetchAll();
     }else{
@@ -15,7 +15,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Métier</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
