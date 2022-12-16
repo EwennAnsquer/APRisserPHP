@@ -12,7 +12,7 @@
                 $categorie = $requete->fetchAll();
 
                 foreach($categorie as $categ){
-                    $requete = $connexion->prepare('SELECT * FROM article inner join categorie on article.ID_CAT = categorie.ID_CAT where article.ID_CAT=:categorie');
+                    $requete = $connexion->prepare('SELECT * FROM article inner join categorie on article.ID_CAT = categorie.ID_CAT where article.ID_CAT=:categorie and STATUS_ART="A"');
                     $requete->bindValue(':categorie', $categ["ID_CAT"], PDO::PARAM_INT);
                     $requete->execute();
                     $articles = $requete->fetchAll();
@@ -23,19 +23,30 @@
                     $actualCat = $requete->fetchAll();
                     ?>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <?php echo($actualCat[0]["LIBELLE_CATEG"]); ?>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                                <?php
-                                    foreach($articles as $art){
-                                        echo('<li><a class="dropdown-item" href="metier.php?m='.$art["ID_ART"].'">'.$art["TITRE_ART"].'</a></li>');
-                                    }
+                            <?php 
+                            if(sizeof($articles)!=0){ ?>
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <?php echo($actualCat[0]["LIBELLE_CATEG"]); ?>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                    <?php
+                                        foreach($articles as $art){
+                                            echo('<li><a class="dropdown-item" href="metier.php?m='.$art["ID_ART"].'">'.$art["TITRE_ART"].'</a></li>');
+                                        }
+                                    ?>
+                                </ul>
+                                <?php 
+                            }else{
                                 ?>
-                            </ul>
+                                <a class="nav-link disabled" href="#" aria-disabled="true">
+                                    <?php echo($actualCat[0]["LIBELLE_CATEG"]); ?>
+                                </a>
+                                <?php
+                            }?>
                         </li>
                     <?php
                 }
+                
             ?>
         </ul>
     </div>
